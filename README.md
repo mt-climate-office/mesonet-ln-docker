@@ -3,7 +3,7 @@ A public Docker build for LoggerNet that uses SSH to access the private LoggerNe
 
 ## Build
 ```
-DOCKER_BUILDKIT=1 docker build -t loggernet https://github.com/mt-climate-office/ln-docker
+docker build --ssh default -t loggernet github.com/mt-climate-office/ln-docker
 
 ```
 
