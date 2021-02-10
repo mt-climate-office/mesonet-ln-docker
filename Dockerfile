@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y \
 RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
 
 # Clone private repository
-RUN --mount=type=ssh git clone github.com/mt-climate-office/loggernet /opt/loggernet
+RUN --mount=type=ssh git clone git@github.com:mt-climate-office/loggernet /opt/loggernet
 
 RUN dpkg --install /opt/loggernet/loggernet-debian_4.6-11_x86_64.deb
 
