@@ -14,7 +14,8 @@ RUN apt-get update && apt-get install -y \
       htop \
       net-tools \
       openssh-client \
-      git
+      git \
+      cron
 
 
 # Download public key for github.com
@@ -34,5 +35,12 @@ COPY entrypoint.sh /entrypoint.sh
 COPY backup_config.sh /opt/backup_config.sh
 COPY backup_config.cora /opt/backup_config.cora
 COPY restore_config.sh /opt/restore_config.sh
+
+# Automated minutely backups of configuration
+RUN printf '* * * * * bash /opt/backup_config.sh\n' > /opt/backup_config
+# Give execution rights on the cron job
+RUN chmod 0644 /opt/backup_config
+# Apply cron job
+RUN crontab /opt/backup_config
 
 ENTRYPOINT ["/entrypoint.sh"]
