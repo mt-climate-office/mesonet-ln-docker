@@ -1,9 +1,9 @@
-# ln-docker
+# mesonet-ln-docker
 A public Docker build for LoggerNet that uses SSH to access the private LoggerNet repo
 
 ## Build
 ```
-docker build --ssh default -t loggernet github.com/mt-climate-office/ln-docker
+docker build --ssh default -t loggernet github.com/mt-climate-office/mesonet-ln-docker
 
 ```
 
