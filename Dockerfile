@@ -1,6 +1,8 @@
 FROM bitnami/minideb:buster
 MAINTAINER Kyle Bocinsky, bocinsky@gmail.com
 
+ENV SSH_KEY=""
+
 EXPOSE 6789
 
 # install dependencies
@@ -15,17 +17,22 @@ RUN apt-get update && apt-get install -y \
       git
 
 
-# RUN printf '#!/bin/sh\nexit 0' > /usr/sbin/policy-rc.d
-
 # Download public key for github.com
 RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-# Clone private repository
-RUN --mount=type=ssh git clone git@github.com:mt-climate-office/loggernet /opt/loggernet
+# Clone private repositories
+RUN --mount=type=ssh git clone git@github.com:mt-climate-office/mesonet-ln-software /opt/mesonet-ln-software
+RUN --mount=type=ssh git clone git@github.com:mt-climate-office/mesonet-ln-config /opt/mesonet-ln-config
 
-RUN dpkg --install /opt/loggernet/loggernet-debian_4.6-11_x86_64.deb
+RUN printf '#!/bin/sh\nexit 0' > /usr/sbin/policy-rc.d
+
+RUN dpkg --install /opt/mesonet-ln-software/loggernet-debian_4.6-11_x86_64.deb
 
 RUN ln -s /opt/CampbellSci/LoggerNet/cora_cmd /usr/local/bin/cora_cmd
 
-ENTRYPOINT /etc/init.d/csilgrnet start && tail -f /dev/null
+COPY entrypoint.sh /entrypoint.sh
+COPY backup_config.sh /opt/backup_config.sh
+COPY backup_config.cora /opt/backup_config.cora
+COPY restore_config.sh /opt/restore_config.sh
 
+ENTRYPOINT ["/entrypoint.sh"]

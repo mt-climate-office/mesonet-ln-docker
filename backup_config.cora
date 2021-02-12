@@ -1,0 +1,3 @@
+connect localhost;
+create-backup-script /opt/mesonet-ln-config/network_config.cora;
+exit;

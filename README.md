@@ -1,15 +1,21 @@
 # mesonet-ln-docker
-A public Docker build for LoggerNet that uses SSH to access the private LoggerNet repo
+A docker image standing up a LoggerNet Linux server
+
+## Launch SSH agent
+```
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+```
 
 ## Build
 ```
-docker build --ssh default -t loggernet github.com/mt-climate-office/mesonet-ln-docker
+DOCKER_BUILDKIT=1 docker build --ssh default -t loggernet git@github.com:mt-climate-office/loggernet
 
 ```
 
 ## Run
 ```
-docker run -d -p 6789:6789 --name loggernet --rm loggernet
+docker run -d -p 6789:6789 --e SSH_KEY="`cat <private key>`" -name loggernet --rm loggernet
 ```
 
 ## Interact
