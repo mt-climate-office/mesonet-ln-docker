@@ -16,7 +16,6 @@ RUN apt-get update && apt-get install -y \
       openssh-client \
       git \
       cron \
-      rsyslog \
       vim
 
 
@@ -39,7 +38,8 @@ COPY backup_config.cora /opt/backup_config.cora
 COPY restore_config.sh /opt/restore_config.sh
 
 # Automated minutely backups of configuration
-RUN printf '* * * * * bash /opt/backup_config.sh\n' > /opt/backup_config
+RUN echo '* * * * * bash /opt/backup_config.sh' > /opt/backup_config
+RUN echo \ >> /opt/backup_config
 # Give execution rights on the cron job
 RUN chmod 0644 /opt/backup_config
 # Apply cron job

@@ -26,4 +26,7 @@ cd /opt/mesonet-ln-config
 git pull
 bash /opt/restore_config.sh
 
+# start cron
+service cron start
+
 tail -f /dev/null
