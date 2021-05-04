@@ -23,3 +23,4 @@ services:
             - SSH_KEY="`cat ~/.ssh/id_ed25519`"
         volumes:
             - /var/opt/Loggernet:/var/opt/CampbellSci/LoggerNet
+            - ~/.ssh:/root/.ssh
