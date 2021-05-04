@@ -1,0 +1,3 @@
+file_server browse {
+	root   /var/data
+}

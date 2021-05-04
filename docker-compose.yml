@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+    caddy:
+        container_name: caddy
+        restart: always
+        image: caddy:2.3.0
+        volumes:
+            - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+            - /var/opt/Caddy/data:/data
+            - /var/opt/Caddy/config:/config
+            - /var/opt/Caddy/log:/var/log
+        ports:
+            - "80:80"
+
+    loggernet:
+        container_name: loggernet
+        restart: always
+        build: ./loggernet
+        expose:
+            - "6789:6789"
+        environment:
+            - SSH_KEY="`cat ~/.ssh/id_ed25519`"
+        volumes:
+            - /var/opt/Loggernet:/var/opt/CampbellSci/LoggerNet

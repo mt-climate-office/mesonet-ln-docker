@@ -15,7 +15,7 @@ DOCKER_BUILDKIT=1 docker build --ssh default -t loggernet --no-cache github.com/
 
 ## Run
 ```
-docker run -d -p 6789:6789 --restart always -e SSH_KEY="`cat ~/.ssh/id_ed25519`" --name loggernet loggernet
+docker run -d -p 6789:6789 -v /var/data:/var/opt/CampbellSci/LoggerNet/data --restart always -e SSH_KEY="`cat ~/.ssh/id_ed25519`" --name loggernet loggernet
 ```
 
 ## Interact
