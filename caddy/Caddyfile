@@ -1,3 +1,2 @@
-file_server browse {
-	root /var/opt/Loggernet/data
-}
+root * /var/opt/Loggernet/data
+file_server browse
