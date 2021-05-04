@@ -22,7 +22,6 @@ services:
         environment:
             - SSH_KEY="`cat ~/.ssh/id_ed25519`"
             - SSH_AUTH_SOCK=/ssh-agent
-
         volumes:
             - /var/opt/Loggernet:/var/opt/CampbellSci/LoggerNet
             - ${SSH_AUTH_SOCK}:/ssh-agent # Forward local machine SSH key to docker
