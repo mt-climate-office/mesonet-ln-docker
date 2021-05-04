@@ -25,4 +25,4 @@ services:
 
         volumes:
             - /var/opt/Loggernet:/var/opt/CampbellSci/LoggerNet
-            - $SSH_AUTH_SOCK:/ssh-agent # Forward local machine SSH key to docker
+            - ${SSH_AUTH_SOCK}:/ssh-agent # Forward local machine SSH key to docker
