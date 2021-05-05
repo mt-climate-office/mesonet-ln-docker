@@ -21,7 +21,7 @@ services:
             - 6789:6789
         environment:
             - SSH_AUTH_SOCK
-            - SSH_KEY="`cat /home/root/.ssh/id_ed25519`"
+            - SSH_KEY="`cat ~/.ssh/id_ed25519`"
         volumes:
             - $SSH_AUTH_SOCK:/ssh-agent
             - ~/.ssh:~/.ssh
