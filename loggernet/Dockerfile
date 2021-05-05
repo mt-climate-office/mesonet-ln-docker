@@ -16,7 +16,8 @@ RUN apt-get update && apt-get install -y \
       openssh-client \
       git \
       cron \
-      vim
+      vim \
+      rsyslog
 
 
 # Download public key for github.com

@@ -14,22 +14,32 @@ DOCKER_BUILDKIT=1 docker build --ssh default -t loggernet --no-cache loggernet
 
 ## Run
 ```
-docker-compose up -d
+docker run -d \
+--name loggernet \
+--restart unless-stopped \
+-p 6789:6789 \
+-v /var/opt/Loggernet/data:/var/opt/CampbellSci/LoggerNet/data \
+-e SSH_KEY="`cat ~/.ssh/id_ed25519`" \
+loggernet
 
-docker run -d -p 6789:6789 -v /var/opt/Loggernet/data:/var/opt/CampbellSci/LoggerNet/data --restart always -e SSH_KEY="`cat ~/.ssh/id_ed25519`" --name loggernet loggernet
-
-docker run -d -p 80:80 -v $PWD/caddy/Caddyfile:/etc/caddy/Caddyfile -v /var/opt/Loggernet/data:/var/opt/Loggernet/data --restart always --name caddy caddy:2.3.0
+docker run -d \
+--name caddy \
+--restart unless-stopped \
+-p 80:80 \
+-v $PWD/caddy/Caddyfile:/etc/caddy/Caddyfile \
+-v /var/opt/Loggernet/data:/var/opt/Loggernet/data \
+-v caddy_data:/data \
+caddy:2.3.0
 ```
 
 ## Interact
 ```
 docker exec -it loggernet bash
 
-# backup
-
 ```
 
 ## Stop
 ```
 docker stop loggernet
+docker stop caddy
 ```
