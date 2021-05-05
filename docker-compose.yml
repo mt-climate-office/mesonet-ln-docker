@@ -17,6 +17,7 @@ services:
         container_name: loggernet
         restart: always
         build: ./loggernet
+            ssh: default
         ports:
             - 6789:6789
         environment:

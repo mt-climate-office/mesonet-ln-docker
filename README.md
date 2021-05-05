@@ -12,6 +12,8 @@ ssh-add ~/.ssh/id_ed25519
 DOCKER_BUILDKIT=1 docker build --ssh default -t loggernet --no-cache github.com/mt-climate-office/mesonet-ln-docker
 
 DOCKER_BUILDKIT=1 docker-compose build --ssh default -t loggernet --no-cache github.com/mt-climate-office/mesonet-ln-docker
+
+DOCKER_BUILDKIT=1 docker-compose build --build-arg ssh=default --no-cache
 ```
 
 ## Run
