@@ -16,7 +16,7 @@ services:
     loggernet:
         container_name: loggernet
         restart: always
-        build: ./loggernet
+#        build: ./loggernet
         ports:
             - 6789:6789
         environment:
