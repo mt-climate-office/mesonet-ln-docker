@@ -11,7 +11,7 @@ services:
             - /var/opt/Caddy/config:/config
             - /var/opt/Caddy/log:/var/log
         ports:
-            - 80:80
+            - "80:80"
 
     loggernet:
         container_name: loggernet
@@ -20,7 +20,8 @@ services:
         ports:
             - 6789:6789
         environment:
-            - SSH_KEY="`cat ~/.ssh/id_ed25519`"
-            - SSH_AUTH_SOCK=/ssh-agent
+            - SSH_AUTH_SOCK=$SSH_AUTH_SOCK
+            - SSH_KEY="`cat /.ssh/id_ed25519`"
         volumes:
+            - ~/.ssh:/.ssh
             - /var/opt/Loggernet:/var/opt/CampbellSci/LoggerNet
