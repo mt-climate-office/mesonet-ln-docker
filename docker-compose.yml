@@ -6,12 +6,10 @@ services:
         restart: always
         image: caddy:2.3.0
         volumes:
-            - ./caddy/Caddyfile:/etc/caddy/Caddyfile
-            - /var/opt/Caddy/data:/data
-            - /var/opt/Caddy/config:/config
-            - /var/opt/Caddy/log:/var/log
+            - $PWD/caddy/Caddyfile:/etc/caddy/Caddyfile
+            - /var/opt/Loggernet/data:/var/opt/Loggernet/data
         ports:
-            - "80:80"
+            - 80:80
 
     loggernet:
         container_name: loggernet
