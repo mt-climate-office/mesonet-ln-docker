@@ -20,8 +20,7 @@ services:
         ports:
             - 6789:6789
         environment:
-            - SSH_AUTH_SOCK=$SSH_AUTH_SOCK
-            - SSH_KEY="`cat /.ssh/id_ed25519`"
+            SSH_AUTH_SOCK: $SSH_AUTH_SOCK
         volumes:
-            - ~/.ssh:/.ssh
+            - $SSH_AUTH_SOCK:$SSH_AUTH_SOCK
             - /var/opt/Loggernet:/var/opt/CampbellSci/LoggerNet
