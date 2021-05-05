@@ -20,7 +20,7 @@ services:
         ports:
             - 6789:6789
         volumes_from:
-            - ssh-agent
+            - ba337d5bcf7d
         environment:
             - SSH_AUTH_SOCK=/.ssh-agent/proxy-socket
         volumes:
