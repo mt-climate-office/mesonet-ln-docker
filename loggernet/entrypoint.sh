@@ -28,5 +28,6 @@ bash /opt/restore_config.sh
 
 # start cron
 service cron start
+service rsyslog start
 
 tail -f /dev/null
