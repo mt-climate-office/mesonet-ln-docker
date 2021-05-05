@@ -13,14 +13,14 @@ services:
         ports:
             - "80:80"
 
-    loggernet:
-        container_name: loggernet
-        restart: always
-        build: ./loggernet
-        ports:
-            - 6789:6789
-        environment:
-            SSH_AUTH_SOCK: /ssh-agent
-        volumes:
-            - $SSH_AUTH_SOCK:/ssh-agent
-            - /var/opt/Loggernet:/var/opt/CampbellSci/LoggerNet
+#    loggernet:
+#        container_name: loggernet
+#        restart: always
+#        build: ./loggernet
+#        ports:
+#            - 6789:6789
+#        environment:
+#            SSH_AUTH_SOCK: /ssh-agent
+#        volumes:
+#            - $SSH_AUTH_SOCK:/ssh-agent
+#            - /var/opt/Loggernet:/var/opt/CampbellSci/LoggerNet

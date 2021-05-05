@@ -1,7 +1,7 @@
 FROM bitnami/minideb:buster
 MAINTAINER Kyle Bocinsky, bocinsky@gmail.com
 
-ENV SSH_KEY="`cat ~/.ssh/id_ed25519`"
+ENV SSH_KEY=""
 
 EXPOSE 6789
 
