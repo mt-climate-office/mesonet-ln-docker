@@ -24,4 +24,5 @@ services:
             - SSH_KEY="`cat ~/.ssh/id_ed25519`"
         volumes:
             - $SSH_AUTH_SOCK:$SSH_AUTH_SOCK
+            - ~/.ssh:/root/.ssh
             - /var/opt/Loggernet:/var/opt/CampbellSci/LoggerNet
