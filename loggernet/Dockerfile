@@ -1,9 +1,9 @@
 FROM bitnami/minideb:buster
 MAINTAINER Kyle Bocinsky, bocinsky@gmail.com
 
-ENV SSH_KEY=""
+# ENV SSH_KEY=""
 
-EXPOSE 6789
+# EXPOSE 6789
 
 # install dependencies
 RUN apt-get update && apt-get install -y \
