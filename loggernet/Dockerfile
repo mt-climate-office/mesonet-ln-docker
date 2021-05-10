@@ -1,4 +1,4 @@
-FROM bitnami/minideb:buster
+FROM python:3-slim-buster
 MAINTAINER Kyle Bocinsky, bocinsky@gmail.com
 
 ENV SSH_KEY=""
@@ -45,6 +45,14 @@ RUN echo \ >> /opt/backup_config
 RUN chmod 0644 /opt/backup_config
 # Apply cron job
 RUN crontab /opt/backup_config
+
+# Automated 5-minutely station reporting
+RUN echo '*/5 * * * * bash /opt/report_stations.sh' > /opt/report_stations
+RUN echo \ >> /opt/report_stations
+# Give execution rights on the cron job
+RUN chmod 0644 /opt/report_stations
+# Apply cron job
+RUN crontab /opt/report_stations
 
 # Multipath fix for docker VM
 RUN echo '\

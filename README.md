@@ -14,7 +14,7 @@ DOCKER_BUILDKIT=1 docker build --ssh default -t loggernet --no-cache loggernet
 
 ## Run
 ```
-docker run -d \
+docker run -d --privileged \
 --name loggernet \
 --restart unless-stopped \
 -p 6789:6789 \
