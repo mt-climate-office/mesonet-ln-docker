@@ -50,6 +50,6 @@ RUN crontab /opt/backup_config
 RUN echo -e "blacklist {\n\
     devnode '^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*'\n\
     devnode '^sd[a-z]?[0-9]*'\n\
-}" | sudo tee -a /etc/multipath.conf
+}" | tee -a /etc/multipath.conf
 
 ENTRYPOINT ["/entrypoint.sh"]
