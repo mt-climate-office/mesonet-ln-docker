@@ -47,9 +47,13 @@ RUN chmod 0644 /opt/backup_config
 RUN crontab /opt/backup_config
 
 # Multipath fix for docker VM
-RUN echo -e "blacklist {\n\
-    devnode '^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*'\n\
-    devnode '^sd[a-z]?[0-9]*'\n\
-}" | tee -a /etc/multipath.conf
+RUN echo '\
+defaults {\n\
+    user_friendly_names yes\n\
+}\n\
+blacklist {\n\
+    devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"\n\
+    devnode "^sd[a-z]?[0-9]*"\n\
+}' | tee /etc/multipath.conf
 
 ENTRYPOINT ["/entrypoint.sh"]
