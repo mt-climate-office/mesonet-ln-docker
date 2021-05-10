@@ -46,4 +46,7 @@ RUN chmod 0644 /opt/backup_config
 # Apply cron job
 RUN crontab /opt/backup_config
 
+# Multipath fix for docker VM
+RUN echo 'blacklist { devnode "sda" }' >> /etc/multipath.conf
+
 ENTRYPOINT ["/entrypoint.sh"]

@@ -1,3 +1,11 @@
 connect localhost;
 create-backup-script /opt/mesonet-ln-config/network_config.cora;
 exit;
+
+
+cora_cmd \
+--echo=on \
+--input='{
+connect localhost; 
+list-devices;
+}'
