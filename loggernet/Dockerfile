@@ -35,7 +35,7 @@ RUN ln -s /opt/CampbellSci/LoggerNet/cora_cmd /usr/local/bin/cora_cmd
 
 COPY entrypoint.sh /entrypoint.sh
 COPY backup_config.sh /opt/backup_config.sh
-COPY backup_config.cora /opt/backup_config.cora
+# COPY backup_config.cora /opt/backup_config.cora
 COPY restore_config.sh /opt/restore_config.sh
 
 # Automated minutely backups of configuration
