@@ -38,6 +38,10 @@ RUN ln -s /opt/CampbellSci/LoggerNet/cora_cmd /usr/local/bin/cora_cmd
 
 COPY entrypoint.sh /entrypoint.sh
 COPY backup_config.sh /opt/backup_config.sh
+COPY report_station.sh /opt/report_station.sh
+RUN chmod u+x /opt/report_station.sh
+COPY update_stations.sh /opt/update_stations.sh
+RUN chmod u+x /opt/update_stations.sh
 # COPY backup_config.cora /opt/backup_config.cora
 COPY restore_config.sh /opt/restore_config.sh
 
@@ -49,13 +53,13 @@ RUN chmod 0644 /opt/backup_config
 # Apply cron job
 RUN crontab /opt/backup_config
 
-## Automated 5-minutely station reporting
-#RUN echo '*/5 * * * * bash /opt/report_stations.sh' > /opt/report_stations
-#RUN echo \ >> /opt/report_stations
-## Give execution rights on the cron job
-#RUN chmod 0644 /opt/report_stations
-## Apply cron job
-#RUN crontab /opt/report_stations
+# Automated 5-minutely station reporting
+RUN echo '*/5 * * * * bash /opt/update_stations.sh' > /opt/update_stations
+RUN echo \ >> /opt/update_stations
+# Give execution rights on the cron job
+RUN chmod 0644 /opt/update_stations
+# Apply cron job
+RUN crontab /opt/update_stations
 
 # Multipath fix for docker VM
 RUN echo '\
