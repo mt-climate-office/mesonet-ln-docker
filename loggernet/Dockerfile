@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y \
       rsyslog \
       jq
 
-RUN pip install xq
+RUN pip install xq yq
 
 # Download public key for github.com
 RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
