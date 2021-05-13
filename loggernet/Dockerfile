@@ -46,20 +46,20 @@ RUN chmod u+x /opt/update_stations.sh
 COPY restore_config.sh /opt/restore_config.sh
 
 # Automated minutely backups of configuration
-RUN echo '* * * * * bash /opt/backup_config.sh' > /opt/backup_config
-RUN echo \ >> /opt/backup_config
-# Give execution rights on the cron job
-RUN chmod 0644 /opt/backup_config
-# Apply cron job
-RUN crontab /opt/backup_config
+#RUN echo '* * * * * root bash /opt/backup_config.sh' >> /etc/crontab
+#RUN echo \ >> /opt/backup_config
+## Give execution rights on the cron job
+#RUN chmod 0644 /opt/backup_config
+## Apply cron job
+#RUN crontab /opt/backup_config
 
 # Automated 5-minutely station reporting
-RUN echo '*/5 * * * * bash /opt/update_stations.sh' > /opt/update_stations
-RUN echo \ >> /opt/update_stations
-# Give execution rights on the cron job
-RUN chmod 0644 /opt/update_stations
-# Apply cron job
-RUN crontab /opt/update_stations
+#RUN echo '*/5 * * * * root bash /opt/update_stations.sh' >> /etc/crontab
+#RUN echo \ >> /opt/update_stations
+## Give execution rights on the cron job
+#RUN chmod 0644 /opt/update_stations
+## Apply cron job
+#RUN crontab /opt/update_stations
 
 # Multipath fix for docker VM
 RUN echo '\
