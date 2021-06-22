@@ -44,6 +44,8 @@ COPY update_stations.sh /opt/update_stations.sh
 RUN chmod u+x /opt/update_stations.sh
 # COPY backup_config.cora /opt/backup_config.cora
 COPY restore_config.sh /opt/restore_config.sh
+COPY update_station_programs.sh /opt/update_station_programs.sh
+RUN chmod u+x /opt/update_station_programs.sh
 
 # Automated minutely backups of configuration
 #RUN echo '* * * * * root bash /opt/backup_config.sh' >> /etc/crontab

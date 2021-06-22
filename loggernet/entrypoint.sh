@@ -11,6 +11,13 @@ echo "${SSH_KEY}" > ~/.ssh/id_rsa
 chmod 700 ~/.ssh
 chmod 600 ~/.ssh/id_rsa
 
+env >> ~/env.log
+echo 'PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' > /etc/crontab
+echo 'SHELL=/bin/bash' >> /etc/crontab
+echo '* * * * * root bash -c "source $HOME/env.log; source /opt/backup_config.sh"' >> /etc/crontab
+echo '*/5 * * * * root bash -c "source $HOME/env.log; source /opt/update_stations.sh"' >> /etc/crontab
+echo '0 * * * * root bash -c "source $HOME/env.log; source /opt/update_station_programs.sh"' >> /etc/crontab
+
 echo "Host *\n    StrictHostKeyChecking no\n    UserKnownHostsFile=/dev/null\n" > ~/.ssh/config
 
 # Configure our user and email to commit as.
@@ -29,13 +36,5 @@ bash /opt/restore_config.sh
 # start cron
 service cron start
 service rsyslog start
-
-env >> ~/env.log
-echo 'PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' > /etc/crontab
-echo 'SHELL=/bin/bash' >> /etc/crontab
-echo '* * * * * root bash -c "source $HOME/env.log; source /opt/backup_config.sh"' >> /etc/crontab
-echo '*/5 * * * * root bash -c "source $HOME/env.log; source /opt/update_stations.sh"' >> /etc/crontab
-
-service cron restart
 
 tail -f /dev/null
