@@ -14,7 +14,14 @@ do
             connect localhost;
             get-program-file $station --use-cache=true --file-name=$station.txt --file-path=/opt/mesonet-ln-config/;
             }"
-    mv \\$station.txt $station.txt
+    
+    if [ -s \\$station.txt ]
+    then
+        mv \\$station.txt $station.txt
+    else
+        rm -f \\$station.txt
+    fi
+    
 done
 
 find . -size  0 -print -delete
