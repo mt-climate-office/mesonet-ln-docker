@@ -19,4 +19,4 @@ cat $TMPFILE |
 
 #cat $TMPFILE
 
-curl -T $TMPFILE https://fcfc-mesonet-staging.cfc.umt.edu/api/v2/loggernet
+curl -T $TMPFILE https://fcfc-mesonet-staging.cfc.umt.edu/api/v2/loggernet/
