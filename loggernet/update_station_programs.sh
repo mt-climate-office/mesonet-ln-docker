@@ -15,12 +15,7 @@ do
             get-program-file $station --use-cache=true --file-name=$station.txt --file-path=/opt/mesonet-ln-config/;
             }"
     
-    if [ -s \\$station.txt ]
-    then
-        mv \\$station.txt $station.txt
-    else
-        rm -f \\$station.txt
-    fi
+    [ -s \\$station.txt ] && mv \\$station.txt $station.txt || rm -f \\$station.txt
     
 done
 

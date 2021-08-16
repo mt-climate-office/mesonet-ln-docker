@@ -43,3 +43,23 @@ docker exec -it loggernet bash
 docker stop loggernet
 docker stop caddy
 ```
+
+## Rebuild
+```
+docker stop loggernet
+docker rm loggernet
+
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+
+DOCKER_BUILDKIT=1 docker build --ssh default -t loggernet --no-cache loggernet
+
+docker run -d --privileged \
+--name loggernet \
+--restart unless-stopped \
+-p 6789:6789 \
+-v /var/opt/Loggernet/data:/var/opt/CampbellSci/LoggerNet/data \
+-e SSH_KEY="`cat ~/.ssh/id_ed25519`" \
+loggernet
+
+```
