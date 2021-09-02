@@ -2,7 +2,7 @@
 
 trap 'rm -f "$TMPFILE"' EXIT
 
-TMPFILE=$(mktemp) || exit 1
+TMPFILE=$(mktemp --suffix .json) || exit 1
 # echo "Our temp file is $TMPFILE"
 
 ## Get a station's data
@@ -15,7 +15,7 @@ logger-query-ex $1 FiveMin $TMPFILE most-recent 5 --format=\"CSIXML\";
 
 cat $TMPFILE |
 	xq . |
-       tee $TMPFILE >/dev/null
+       tee $TMPFILE > /dev/null
 
 #cat $TMPFILE
 
