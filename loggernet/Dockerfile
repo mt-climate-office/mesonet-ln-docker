@@ -47,9 +47,6 @@ COPY restore_config.sh /opt/restore_config.sh
 COPY update_station_programs.sh /opt/update_station_programs.sh
 RUN chmod u+x /opt/update_station_programs.sh
 
-RUN /etc/init.d/csilgrnet start && \
-bash /opt/restore_config.sh
-
 # Multipath fix for docker VM
 RUN echo '\
 defaults {\n\

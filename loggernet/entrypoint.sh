@@ -22,7 +22,7 @@ echo "Starting LoggerNet Service"
 ## restore initial configuration
 cd /opt/mesonet-ln-config
 git pull
-#bash /opt/restore_config.sh
+bash /opt/restore_config.sh
 
 env >> ~/env.log
 echo 'PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' > /etc/crontab
