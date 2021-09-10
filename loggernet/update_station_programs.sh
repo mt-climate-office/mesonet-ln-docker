@@ -12,7 +12,7 @@ do
         --echo=on \
         --input="{
             connect localhost;
-            get-program-file $station --use-cache=true --file-name=$station.txt --file-path=/opt/mesonet-ln-config/;
+            get-program-file ${station}Photo --use-cache=true --file-name=$station.txt --file-path=/opt/mesonet-ln-config/;
             }"
     
     [ -s \\$station.txt ] && mv \\$station.txt $station.txt || rm -f \\$station.txt
