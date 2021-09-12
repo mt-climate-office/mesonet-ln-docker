@@ -32,7 +32,7 @@ RUN --mount=type=ssh git clone git@github.com:mt-climate-office/mesonet-ln-confi
 
 RUN printf '#!/bin/sh\nexit 0' > /usr/sbin/policy-rc.d
 
-RUN dpkg --install /opt/mesonet-ln-software/loggernet-debian_4.6-11_x86_64.deb
+RUN dpkg --install /opt/mesonet-ln-software/loggernet-debian_4.7-12_x86_64.deb
 
 RUN ln -s /opt/CampbellSci/LoggerNet/cora_cmd /usr/local/bin/cora_cmd
 
