@@ -24,6 +24,8 @@ cd /opt/mesonet-ln-config
 git pull
 bash /opt/restore_config.sh
 
+sleep 30
+
 env >> ~/env.log
 echo 'PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' > /etc/crontab
 echo 'SHELL=/bin/bash' >> /etc/crontab

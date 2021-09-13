@@ -29,6 +29,7 @@ RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
 # Clone private repositories
 RUN --mount=type=ssh git clone git@github.com:mt-climate-office/mesonet-ln-software /opt/mesonet-ln-software
 RUN --mount=type=ssh git clone git@github.com:mt-climate-office/mesonet-ln-config /opt/mesonet-ln-config
+RUN --mount=type=ssh git clone git@github.com:mt-climate-office/mesonet-ln-config /opt/mesonet-csi-config
 
 RUN printf '#!/bin/sh\nexit 0' > /usr/sbin/policy-rc.d
 
