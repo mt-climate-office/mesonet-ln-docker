@@ -22,7 +22,7 @@ echo "Starting LoggerNet Service"
 ## restore initial configuration
 cd /opt/mesonet-ln-config
 git pull
-bash /opt/restore_config.sh
+#bash /opt/restore_config.sh
 
 sleep 30
 
