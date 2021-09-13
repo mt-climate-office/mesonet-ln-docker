@@ -23,6 +23,10 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip install yq
 
+## Set time zone for server
+#ENV TZ=America/Denver
+#RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 # Download public key for github.com
 RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
 
