@@ -27,7 +27,7 @@ docker run -d \
 --restart unless-stopped \
 -p 80:80 \
 -v $PWD/caddy/Caddyfile:/etc/caddy/Caddyfile \
--v /var/opt/Loggernet/data:/var/opt/Loggernet/data \
+-v /var/opt/Loggernet:/var/opt/Loggernet \
 -v caddy_data:/data \
 caddy:2.3.0
 ```
@@ -58,7 +58,7 @@ docker run -d --privileged \
 --name loggernet \
 --restart unless-stopped \
 -p 6789:6789 \
--v /var/opt/Loggernet/data:/var/opt/CampbellSci/LoggerNet/data \
+-v /var/opt/Loggernet:/var/opt/CampbellSci/LoggerNet \
 -e SSH_KEY="`cat ~/.ssh/id_ed25519`" \
 loggernet
 
