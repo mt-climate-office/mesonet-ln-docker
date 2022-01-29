@@ -2,7 +2,7 @@
 
 cd /opt/mesonet-ln-config
 
-stations="`curl https://fcfc-mesonet-staging.cfc.umt.edu/api/loggernet | jq -r '. | @sh' | tr -d \'`"
+stations="`curl https://mesonet.climate.umt.edu/api/loggernet | jq -r '. | @sh' | tr -d \'`"
 
 echo $stations
 
