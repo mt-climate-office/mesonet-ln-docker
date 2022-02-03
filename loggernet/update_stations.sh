@@ -9,5 +9,5 @@ echo $stations
 for station in $stations
 do
 #    ((i=i%N)); ((i++==0)) && wait
-    timeout 5m /opt/update_station.sh $station #&
+    /opt/update_station.sh $station #&
 done
