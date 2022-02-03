@@ -1,5 +1,5 @@
 # FROM bitnami/minideb:buster
-FROM python:3-slim-buster
+FROM python:3-slim-bullseye
 MAINTAINER Kyle Bocinsky, bocinsky@gmail.com
 
 ENV SSH_KEY=""
@@ -32,8 +32,8 @@ RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
 
 # Clone private repositories
 RUN --mount=type=ssh git clone git@github.com:mt-climate-office/mesonet-ln-software /opt/mesonet-ln-software
-RUN --mount=type=ssh git clone git@github.com:mt-climate-office/mesonet-ln-config /opt/mesonet-ln-config
-RUN --mount=type=ssh git clone git@github.com:mt-climate-office/mesonet-ln-config /opt/mesonet-csi-config
+RUN --mount=type=ssh git clone git@github.com:mt-climate-office/mesonet-ln-server /opt/mesonet-ln-server
+RUN --mount=type=ssh git clone git@github.com:mt-climate-office/mesonet-ln-programs /opt/mesonet-ln-programs
 
 RUN printf '#!/bin/sh\nexit 0' > /usr/sbin/policy-rc.d
 
@@ -43,14 +43,16 @@ RUN ln -s /opt/CampbellSci/LoggerNet/cora_cmd /usr/local/bin/cora_cmd
 
 COPY entrypoint.sh /entrypoint.sh
 COPY backup_config.sh /opt/backup_config.sh
-COPY report_station.sh /opt/report_station.sh
-RUN chmod u+x /opt/report_station.sh
 COPY update_stations.sh /opt/update_stations.sh
 RUN chmod u+x /opt/update_stations.sh
+COPY update_stations.sh /opt/update_station.sh
+RUN chmod u+x /opt/update_station.sh
+COPY report_station.sh /opt/report_station.sh
+RUN chmod u+x /opt/report_station.sh
+COPY update_station_program.sh /opt/update_station_program.sh
+RUN chmod u+x /opt/update_station_program.sh
 # COPY backup_config.cora /opt/backup_config.cora
 COPY restore_config.sh /opt/restore_config.sh
-COPY update_station_programs.sh /opt/update_station_programs.sh
-RUN chmod u+x /opt/update_station_programs.sh
 
 # Multipath fix for docker VM
 RUN echo '\

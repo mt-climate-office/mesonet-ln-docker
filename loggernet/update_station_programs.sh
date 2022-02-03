@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /opt/mesonet-ln-config
+cd /opt/mesonet-ln-stations
 
 stations="`curl https://mesonet.climate.umt.edu/api/loggernet | jq -r '. | @sh' | tr -d \'`"
 
@@ -8,19 +8,19 @@ echo $stations
 
 for station in $stations
 do
-	cora_cmd \
+    git switch -C $station
+    
+    cora_cmd \
         --echo=on \
         --input="{
             connect localhost;
-            get-program-file ${station}Photo --use-cache=true --file-name=$station.txt --file-path=/opt/mesonet-csi-config/stations/;
+            get-program-file ${station} --use-cache=true --file-name=$station.txt --file-path=/opt/mesonet-ln-stations/;
             }"
     
     [ -s \\$station.txt ] && mv \\$station.txt $station.txt || rm -f \\$station.txt
     
+    git add .
+    git commit -m "updated ${station} program backup"
+    git push
+    git switch main
 done
-
-find . -size  0 -print -delete
-
-git add .
-git commit -m "updated station program backups"
-git push

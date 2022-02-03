@@ -6,5 +6,5 @@ echo $stations
 
 for station in $stations
 do
-	/opt/report_station.sh $station
+    timeout 5m /opt/update_station.sh $station &
 done
