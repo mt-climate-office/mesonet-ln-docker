@@ -4,8 +4,7 @@ stations="`curl https://mesonet.climate.umt.edu/api/v2/loggernet/ | jq -r '. | @
 
 echo $stations
 
-n = 4
-
+n = 1
 
 for station in $stations
 do
