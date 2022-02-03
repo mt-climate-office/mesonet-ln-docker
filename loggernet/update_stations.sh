@@ -4,10 +4,7 @@ stations="`curl https://mesonet.climate.umt.edu/api/v2/loggernet/ | jq -r '. | @
 
 echo $stations
 
-n = 1
-
 for station in $stations
 do
-    ((i=i%N)); ((i++==0)) && wait
     timeout 5m /opt/update_station.sh $station &
 done
