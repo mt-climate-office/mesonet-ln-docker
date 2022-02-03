@@ -49,6 +49,8 @@ COPY update_station.sh /opt/update_station.sh
 RUN chmod u+x /opt/update_station.sh
 COPY report_station.sh /opt/report_station.sh
 RUN chmod u+x /opt/report_station.sh
+COPY update_station_programs.sh /opt/update_station_programs.sh
+RUN chmod u+x /opt/update_station_programs.sh
 COPY update_station_program.sh /opt/update_station_program.sh
 RUN chmod u+x /opt/update_station_program.sh
 # COPY backup_config.cora /opt/backup_config.cora
