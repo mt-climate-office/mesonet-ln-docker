@@ -45,7 +45,7 @@ COPY entrypoint.sh /entrypoint.sh
 COPY backup_config.sh /opt/backup_config.sh
 COPY update_stations.sh /opt/update_stations.sh
 RUN chmod u+x /opt/update_stations.sh
-COPY update_stations.sh /opt/update_station.sh
+COPY update_station.sh /opt/update_station.sh
 RUN chmod u+x /opt/update_station.sh
 COPY report_station.sh /opt/report_station.sh
 RUN chmod u+x /opt/report_station.sh
