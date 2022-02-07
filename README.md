@@ -4,7 +4,7 @@ A docker image standing up a LoggerNet Linux server
 ## Launch SSH agent
 ```
 eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_ed25519
+ssh-add /git/.ssh/id_ed25519
 ```
 
 ## Build Loggernet
@@ -19,7 +19,7 @@ docker run -d --privileged \
 --restart unless-stopped \
 -p 6789:6789 \
 -v /var/opt/Loggernet/data:/var/opt/CampbellSci/LoggerNet/data \
--e SSH_KEY="`cat ~/.ssh/id_ed25519`" \
+-e SSH_KEY="`cat /git/.ssh/id_ed25519`" \
 loggernet
 
 docker run -d \
@@ -55,7 +55,7 @@ sudo git pull
 # sudo rsync -avzh kbocinsky@fcfc-mesonet-ln.cfc.umt.edu:/var/opt/Loggernet/ /var/opt/Loggernet/
 
 eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_ed25519
+ssh-add /git/.ssh/id_ed25519
 
 DOCKER_BUILDKIT=1 docker build --ssh default -t loggernet --no-cache loggernet
 
@@ -64,7 +64,7 @@ docker run -d --privileged \
 --restart unless-stopped \
 -p 6789:6789 \
 -v /var/opt/Loggernet:/var/opt/CampbellSci/LoggerNet \
--e SSH_KEY="`cat ~/.ssh/id_ed25519`" \
+-e SSH_KEY="`cat /git/.ssh/id_ed25519`" \
 loggernet
 
 ```
