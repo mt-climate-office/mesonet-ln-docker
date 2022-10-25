@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /opt/mesonet-ln-config
+cd /opt/mesonet-ln-server
 
 git pull
 
@@ -9,7 +9,7 @@ cora_cmd \
 --echo=off \
 --input='{
 connect localhost;
-create-backup-script /opt/mesonet-ln-config/network_config.cora;
+create-backup-script /opt/mesonet-ln-server/network_config.cora;
 }'
 
 git add .

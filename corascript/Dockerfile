@@ -2,16 +2,19 @@
 FROM python:3-slim-bullseye
 MAINTAINER Kyle Bocinsky, bocinsky@gmail.com
 
-ENV SSH_KEY=""
+ENV SSH_KEY="`cat ~/.ssh/id_rsa`"
 
 EXPOSE 6789
 
 # install dependencies
 RUN apt-get update && apt-get install -y \
-#      curl \
+      curl \
+      libc6 \
+      libgcc1 \
+      libstdc++6 \
 #      libcurl4 \
-#      zip \
-#      xdg-utils \
+      zip \
+      xdg-utils \
 #      htop \
 #      net-tools \
       openssh-client \
@@ -30,3 +33,5 @@ RUN --mount=type=ssh git clone git@github.com:mt-climate-office/mesonet-ln-softw
 RUN printf '#!/bin/sh\nexit 0' > /usr/sbin/policy-rc.d
 
 RUN dpkg --install /opt/mesonet-ln-software/loggernet-debian_4.7-12_x86_64.deb
+
+RUN ln -s /opt/CampbellSci/LoggerNet/cora_cmd /usr/local/bin/cora_cmd
