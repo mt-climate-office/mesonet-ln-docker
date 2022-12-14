@@ -49,7 +49,7 @@ docker stop caddy
 docker stop loggernet
 docker rm loggernet
 
-cd /var/opt/mesonet-ln-docker
+cd /git/mesonet-ln-docker
 sudo git pull
 
 # sudo rsync -avzh kbocinsky@fcfc-mesonet-ln.cfc.umt.edu:/var/opt/Loggernet/ /var/opt/Loggernet/
