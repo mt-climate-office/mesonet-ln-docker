@@ -13,6 +13,8 @@ connect localhost;
 logger-query-ex ${1} FiveMin $TMPFILE most-recent 3 --format=\"CSIXML\" --reported-station-name=${1};
 }"
 
+sleep 0.1
+
 cat $TMPFILE |
 	xq . |
        tee $TMPFILE > /dev/null
