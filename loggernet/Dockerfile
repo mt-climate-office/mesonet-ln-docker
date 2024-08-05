@@ -1,6 +1,6 @@
 # FROM bitnami/minideb:buster
 FROM python:3-slim-bullseye
-MAINTAINER Kyle Bocinsky, bocinsky@gmail.com
+# MAINTAINER Kyle Bocinsky, bocinsky@gmail.com
 
 ENV SSH_KEY=""
 
