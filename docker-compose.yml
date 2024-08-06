@@ -19,6 +19,7 @@ services:
             - SSH_KEY
         volumes:
             - /var/opt/Loggernet/data:/var/opt/CampbellSci/LoggerNet/data
+            - ./loggernet/scripts:/opt/
 
 secrets:
     SSH_KEY:
