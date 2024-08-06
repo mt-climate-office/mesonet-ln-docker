@@ -3,19 +3,19 @@ set -e -x -v
 
 echo "Downloading ln software"
 # Clone private repositories
-RUN GIT_SSH_COMMAND='ssh -i /run/secrets/SSH_KEY' git clone git@github.com:mt-climate-office/mesonet-ln-software /opt/mesonet-ln-software
-RUN GIT_SSH_COMMAND='ssh -i /run/secrets/SSH_KEY' git clone git@github.com:mt-climate-office/mesonet-ln-server /opt/mesonet-ln-server
-RUN GIT_SSH_COMMAND='ssh -i /run/secrets/SSH_KEY' git clone git@github.com:mt-climate-office/mesonet-ln-programs /opt/mesonet-ln-programs
+GIT_SSH_COMMAND='ssh -i /run/secrets/SSH_KEY' git clone git@github.com:mt-climate-office/mesonet-ln-software /opt/mesonet-ln-software
+GIT_SSH_COMMAND='ssh -i /run/secrets/SSH_KEY' git clone git@github.com:mt-climate-office/mesonet-ln-server /opt/mesonet-ln-server
+GIT_SSH_COMMAND='ssh -i /run/secrets/SSH_KEY' git clone git@github.com:mt-climate-office/mesonet-ln-programs /opt/mesonet-ln-programs
 
-RUN printf '#!/bin/sh\nexit 0' > /usr/sbin/policy-rc.d
+printf '#!/bin/sh\nexit 0' > /usr/sbin/policy-rc.d
 
 echo "Installing LoggerNet"
-RUN dpkg --install /opt/mesonet-ln-software/loggernet-debian_4.7-12_x86_64.deb
+dpkg --install /opt/mesonet-ln-software/loggernet-debian_4.7-12_x86_64.deb
 
-RUN ln -s /opt/CampbellSci/LoggerNet/cora_cmd /usr/local/bin/cora_cmd
-RUN chmod u+x /opt/*.sh
+ln -s /opt/CampbellSci/LoggerNet/cora_cmd /usr/local/bin/cora_cmd
+chmod u+x /opt/*.sh
 
-ENV SSH_KEY=$(cat /run/secrets/SSH_KEY)
+export SSH_KEY=$(cat /run/secrets/SSH_KEY)
 
 # Verify our environment variables are set
 [ -z "${SSH_KEY}" ] && { echo "Need to set SSH_KEY"; exit 1; }
