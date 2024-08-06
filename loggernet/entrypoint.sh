@@ -3,9 +3,9 @@ set -e -x -v
 
 echo "Downloading ln software"
 # Clone private repositories
-GIT_SSH_COMMAND='ssh -i /run/secrets/SSH_KEY' git clone git@github.com:mt-climate-office/mesonet-ln-software /opt/mesonet-ln-software
-GIT_SSH_COMMAND='ssh -i /run/secrets/SSH_KEY' git clone git@github.com:mt-climate-office/mesonet-ln-server /opt/mesonet-ln-server
-GIT_SSH_COMMAND='ssh -i /run/secrets/SSH_KEY' git clone git@github.com:mt-climate-office/mesonet-ln-programs /opt/mesonet-ln-programs
+git -C /opt/mesonet-ln-software pull || GIT_SSH_COMMAND='ssh -i /run/secrets/SSH_KEY' git clone git@github.com:mt-climate-office/mesonet-ln-software /opt/mesonet-ln-software
+git -C /opt/mesonet-ln-server pull || GIT_SSH_COMMAND='ssh -i /run/secrets/SSH_KEY' git clone git@github.com:mt-climate-office/mesonet-ln-server /opt/mesonet-ln-server
+git -C /opt/mesonet-ln-programs pull || GIT_SSH_COMMAND='ssh -i /run/secrets/SSH_KEY' git clone git@github.com:mt-climate-office/mesonet-ln-programs /opt/mesonet-ln-programs
 
 printf '#!/bin/sh\nexit 0' > /usr/sbin/policy-rc.d
 
