@@ -12,10 +12,10 @@ clone_or_pull() {
 
     if [ -d "$clone_dir" ]; then
         echo "Directory $clone_dir exists. Performing git pull."
-        $GIT_SSH_COMMAND git -C "$clone_dir" pull
+        GIT_SSH_COMMAND="$GIT_SSH_COMMAND" git -C "$clone_dir" pull
     else
         echo "Directory $clone_dir does not exist. Performing git clone."
-        $GIT_SSH_COMMAND git clone "$repo_url" "$clone_dir"
+        GIT_SSH_COMMAND="$GIT_SSH_COMMAND" git clone "$repo_url" "$clone_dir"
     fi
 }
 
