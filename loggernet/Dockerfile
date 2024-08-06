@@ -30,40 +30,41 @@ RUN pip install yq
 # Download public key for github.com
 RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
 
+CMD tail -f /dev/null
 # Clone private repositories
-RUN --mount=type=ssh git clone git@github.com:mt-climate-office/mesonet-ln-software /opt/mesonet-ln-software
-RUN --mount=type=ssh git clone git@github.com:mt-climate-office/mesonet-ln-server /opt/mesonet-ln-server
-RUN --mount=type=ssh git clone git@github.com:mt-climate-office/mesonet-ln-programs /opt/mesonet-ln-programs
+# RUN --mount=type=ssh git clone git@github.com:mt-climate-office/mesonet-ln-software /opt/mesonet-ln-software
+# RUN --mount=type=ssh git clone git@github.com:mt-climate-office/mesonet-ln-server /opt/mesonet-ln-server
+# RUN --mount=type=ssh git clone git@github.com:mt-climate-office/mesonet-ln-programs /opt/mesonet-ln-programs
 
-RUN printf '#!/bin/sh\nexit 0' > /usr/sbin/policy-rc.d
+# RUN printf '#!/bin/sh\nexit 0' > /usr/sbin/policy-rc.d
 
-RUN dpkg --install /opt/mesonet-ln-software/loggernet-debian_4.7-12_x86_64.deb
+# RUN dpkg --install /opt/mesonet-ln-software/loggernet-debian_4.7-12_x86_64.deb
 
-RUN ln -s /opt/CampbellSci/LoggerNet/cora_cmd /usr/local/bin/cora_cmd
+# RUN ln -s /opt/CampbellSci/LoggerNet/cora_cmd /usr/local/bin/cora_cmd
 
-COPY entrypoint.sh /entrypoint.sh
-COPY backup_config.sh /opt/backup_config.sh
-COPY update_stations.sh /opt/update_stations.sh
-RUN chmod u+x /opt/update_stations.sh
-COPY update_station.sh /opt/update_station.sh
-RUN chmod u+x /opt/update_station.sh
-COPY report_station.sh /opt/report_station.sh
-RUN chmod u+x /opt/report_station.sh
-COPY update_station_programs.sh /opt/update_station_programs.sh
-RUN chmod u+x /opt/update_station_programs.sh
-COPY update_station_program.sh /opt/update_station_program.sh
-RUN chmod u+x /opt/update_station_program.sh
-# COPY backup_config.cora /opt/backup_config.cora
-COPY restore_config.sh /opt/restore_config.sh
+# COPY entrypoint.sh /entrypoint.sh
+# COPY backup_config.sh /opt/backup_config.sh
+# COPY update_stations.sh /opt/update_stations.sh
+# RUN chmod u+x /opt/update_stations.sh
+# COPY update_station.sh /opt/update_station.sh
+# RUN chmod u+x /opt/update_station.sh
+# COPY report_station.sh /opt/report_station.sh
+# RUN chmod u+x /opt/report_station.sh
+# COPY update_station_programs.sh /opt/update_station_programs.sh
+# RUN chmod u+x /opt/update_station_programs.sh
+# COPY update_station_program.sh /opt/update_station_program.sh
+# RUN chmod u+x /opt/update_station_program.sh
+# # COPY backup_config.cora /opt/backup_config.cora
+# COPY restore_config.sh /opt/restore_config.sh
 
-# Multipath fix for docker VM
-RUN echo '\
-defaults {\n\
-    user_friendly_names yes\n\
-}\n\
-blacklist {\n\
-    devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"\n\
-    devnode "^sd[a-z]?[0-9]*"\n\
-}' | tee /etc/multipath.conf
+# # Multipath fix for docker VM
+# RUN echo '\
+# defaults {\n\
+#     user_friendly_names yes\n\
+# }\n\
+# blacklist {\n\
+#     devnode "^(ram|raw|loop|fd|md|dm-|sr|scd|st)[0-9]*"\n\
+#     devnode "^sd[a-z]?[0-9]*"\n\
+# }' | tee /etc/multipath.conf
 
-ENTRYPOINT ["/entrypoint.sh"]
+# ENTRYPOINT ["/entrypoint.sh"]

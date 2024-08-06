@@ -17,7 +17,11 @@ services:
         build: ./loggernet
         ports:
             - 6789:6789
-        environment:
+        secrets:
             - SSH_KEY
         volumes:
             - /var/opt/Loggernet/data:/var/opt/CampbellSci/LoggerNet/data
+
+secrets:
+    SSH_KEY:
+        file: /git/.ssh/id_ed25519
