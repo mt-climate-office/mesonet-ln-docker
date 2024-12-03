@@ -22,9 +22,4 @@ clone_or_pull() {
 # Repositories and their target directories
 clone_or_pull "git@github.com:mt-climate-office/mesonet-ln-software" "/opt/mesonet-ln-software"
 
-# Clone private repositories
-check_compile.sh /opt/check_compile
-chmod +x /opt/check_compile
-ln -s /opt/check_compile /usr/local/bin/check_compile
-
 sleep infinity
