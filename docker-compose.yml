@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
     caddy:
         container_name: caddy
@@ -17,7 +15,7 @@ services:
         build: ./loggernet
         ports:
             - 6789:6789
-        environment:
+        secrets:
             - SSH_KEY
         volumes:
             - /var/opt/Loggernet/data:/var/opt/CampbellSci/LoggerNet/data
@@ -28,3 +26,8 @@ services:
         build: ./config
         environment:
             - SSH_KEY
+            - ./loggernet/scripts:/opt/
+
+secrets:
+    SSH_KEY:
+        file: /git/.ssh/id_ed25519
