@@ -22,7 +22,7 @@ RUN apt install -y ssh git
 RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
 
 # Clone private repositories
-RUN check_compile.sh /opt/check_compile
+COPY ./check_compile.sh /opt/check_compile
 RUN chmod +x /opt/check_compile
 RUN ln -s /opt/check_compile /usr/local/bin/check_compile
 
