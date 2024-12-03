@@ -21,3 +21,10 @@ services:
             - SSH_KEY
         volumes:
             - /var/opt/Loggernet/data:/var/opt/CampbellSci/LoggerNet/data
+    
+    config:
+        container_name: config
+        restart: always
+        build: ./config
+        environment:
+            - SSH_KEY
