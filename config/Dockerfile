@@ -1,6 +1,9 @@
 FROM python:3.12-slim-bookworm
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
+ENV SSH_KEY=""
+COPY entrypoint.sh /entrypoint.sh
+
 RUN dpkg --add-architecture i386
 
 RUN apt-get update && apt-get install -y \
@@ -17,10 +20,4 @@ RUN apt install -y ssh git
 # Download public key for github.com
 RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-# Clone private repositories
-RUN --mount=type=ssh git clone git@github.com:mt-climate-office/mesonet-ln-software /opt/mesonet-ln-software
-COPY check_compile.sh /opt/check_compile
-RUN chmod +x /opt/check_compile
-RUN ln -s /opt/check_compile /usr/local/bin/check_compile
-
-CMD ["sleep", "infinity"]
+ENTRYPOINT ["/entrypoint.sh"]

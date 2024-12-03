@@ -24,9 +24,8 @@ services:
         container_name: config
         restart: always
         build: ./config
-        environment:
+        secrets:
             - SSH_KEY
-            - ./loggernet/scripts:/opt/
 
 secrets:
     SSH_KEY:
