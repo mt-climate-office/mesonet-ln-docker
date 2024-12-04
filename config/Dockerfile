@@ -5,19 +5,25 @@ ENV SSH_KEY=""
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-RUN dpkg --add-architecture i386
+# Install some tools required for creating the image
+RUN apt-get update \
+	&& apt-get install -y --no-install-recommends \
+		curl \
+		unzip \
+		ca-certificates \
+		xvfb \
+        git
 
-RUN apt-get update && apt-get install -y \
-    wget \
-    xvfb \
-    coreutils
+# Install wine and related packages
+RUN dpkg --add-architecture i386 \
+		&& apt-get update \
+		&& apt-get install -y \
+				wine-stable \
+				winetricks \
+				wine32 \
+				libgl1-mesa-glx:i386 \
+		&& rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -pm755 /etc/apt/keyrings
-RUN wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
-RUN wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/debian/dists/bookworm/winehq-bookworm.sources
-RUN apt install -y --install-recommends wine
-
-RUN apt install -y ssh git
 # Download public key for github.com
 RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
 
