@@ -30,12 +30,11 @@ RUN useradd -ms /bin/bash wine && \
     echo "wine ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER wine
-WORKDIR /home/myuser
 
-RUN mkdir -p ~/myapp/prefix
-ENV WINEPREFIX=$HOME/myapp/prefix 
+RUN mkdir -p /home/wine/myapp/prefix
+ENV WINEPREFIX=/home/wine/myapp/prefix 
 ENV WINEARCH=win32 
-ENV WINEPATH=$HOME/myapp 
+ENV WINEPATH=/home/wine/myapp 
 RUN wineboot --init
 
 CMD ["sleep", "infinity"]
