@@ -26,5 +26,16 @@ COPY ./check_compile.sh /opt/check_compile
 RUN chmod +x /opt/check_compile
 RUN ln -s /opt/check_compile /usr/local/bin/check_compile
 
+RUN useradd -ms /bin/bash wine && \
+    echo "myuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+USER wine
+WORKDIR /home/myuser
+
+RUN mkdir -p ~/myapp/prefix
+ENV WINEPREFIX=$HOME/myapp/prefix 
+ENV WINEARCH=win32 
+ENV WINEPATH=$HOME/myapp 
+RUN wineboot --init
 
 ENTRYPOINT ["/entrypoint.sh"]
