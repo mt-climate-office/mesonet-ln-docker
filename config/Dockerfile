@@ -28,6 +28,7 @@ RUN useradd -ms /bin/bash wine && \
     echo "wine ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 RUN mkdir -p /opt/usr && chown -R wine:wine /opt/usr
+RUN chown -R wine:wine /home/wine/.ssh
 
 USER wine
 
