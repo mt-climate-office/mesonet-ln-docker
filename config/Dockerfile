@@ -17,7 +17,7 @@ RUN wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-buil
 RUN wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/debian/dists/bookworm/winehq-bookworm.sources
 RUN apt install -y --install-recommends wine
 
-RUN apt install -y ssh git
+RUN apt install -y ssh git sudo
 # Download public key for github.com
 RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
 
@@ -27,7 +27,7 @@ RUN chmod +x /opt/check_compile
 RUN ln -s /opt/check_compile /usr/local/bin/check_compile
 
 RUN useradd -ms /bin/bash wine && \
-    echo "myuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+    echo "wine ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER wine
 WORKDIR /home/myuser
@@ -38,4 +38,5 @@ ENV WINEARCH=win32
 ENV WINEPATH=$HOME/myapp 
 RUN wineboot --init
 
+CMD ["sleep", "infinity"]
 ENTRYPOINT ["/entrypoint.sh"]
