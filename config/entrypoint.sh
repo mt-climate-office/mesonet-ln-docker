@@ -20,6 +20,6 @@ clone_or_pull() {
 }
 
 # Repositories and their target directories
-clone_or_pull "git@github.com:mt-climate-office/mesonet-ln-software" "/opt/mesonet-ln-software"
+clone_or_pull "git@github.com:mt-climate-office/mesonet-ln-software" "/opt/usr/mesonet-ln-software"
 
 sleep infinity
