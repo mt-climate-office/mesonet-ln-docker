@@ -3,7 +3,7 @@ set -e -x -v
 
 echo "Downloading ln software"
 # Define the SSH command
-GIT_SSH_COMMAND='ssh -i /run/secrets/SSH_KEY'
+GIT_SSH_COMMAND='ssh -i /home/wine/.ssh/id_rsa'
 
 # Function to clone or pull a repository
 clone_or_pull() {

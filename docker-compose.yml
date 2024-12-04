@@ -25,7 +25,11 @@ services:
         restart: always
         build: ./config
         secrets:
-            - SSH_KEY
+            - source: SSH_KEY
+              target: /home/wine/.ssh/id_rsa
+              uid: '1000'  # wine user's UID
+              gid: '1000'  # wine user's GID
+              mode: 0600   # read/write for owner only
 
 secrets:
     SSH_KEY:
